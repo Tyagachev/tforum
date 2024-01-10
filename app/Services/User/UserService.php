@@ -25,7 +25,7 @@ class UserService
         $user->create($saveData);
     }
 
-    public function delete($id)
+    public function delete(int $id)
     {
         $deleteUser = User::query()->find($id);
         $deleteUser->delete();

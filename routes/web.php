@@ -91,14 +91,21 @@ Route::get('/foo', function () {
 });
 
 /*Admin*/
-Route::namespace(RouteServiceProvider::NAMESPACE . 'Admin')->group(function() {
-    Route::get('/admin','IndexController')->name('admin.index');
+Route::middleware(['middleware' => 'admin'])->group(function () {
+    Route::namespace(RouteServiceProvider::NAMESPACE . 'Admin')->group(function() {
+        Route::get('/admin','IndexController')->name('admin.index');
+    });
 });
+
 /*Admin\UserList*/
-Route::namespace(RouteServiceProvider::NAMESPACE . 'Admin\UserList')->group(function() {
-    Route::get('/user-list','IndexController')->name('admin.user-list');
-    Route::get('/user-list/show/{user}','ShowController')->name('admin.user-list.show');
-    Route::get('/user-list/create', 'CreateController')->name('admin.user-list.create');
-    Route::post('/user-list/store', 'StoreController')->name('admin.user-list.store');
+Route::middleware(['middleware' => 'admin'])->group(function () {
+    Route::namespace(RouteServiceProvider::NAMESPACE . 'Admin\UserList')->group(function() {
+        Route::get('/user-list','IndexController')->name('admin.user-list');
+        Route::get('/user-list/show/{user}','ShowController')->name('admin.user-list.show');
+        Route::get('/user-list/create', 'CreateController')->name('admin.user-list.create');
+        Route::post('/user-list/store', 'StoreController')->name('admin.user-list.store');
+        Route::delete('/user-list/delete', 'DestroyController')->name('admin.user-list.delete');
+    });
 });
+
 

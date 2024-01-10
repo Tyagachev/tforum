@@ -14,6 +14,7 @@ class DestroyController extends BaseController
     public function __invoke(UserDestroyRequest $request)
     {
         $userId = $request->validated();
-        $this->service->delete($userId);
+        $this->service->delete($userId['id']);
+        return redirect()->route('admin.user-list');
     }
 }
