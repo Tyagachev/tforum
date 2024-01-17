@@ -4,13 +4,17 @@ namespace App\Http\Controllers\Admin\UserList;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ShowController extends BaseController
 {
     /**
-     * Handle the incoming request.
+     * Просмотр карточки пользователя
+     *
+     * @param string $id
+     * @return View
      */
-    public function __invoke($id)
+    public function __invoke(string $id): View
     {
         $userObj = $this->repository->getOneObj($id);
 

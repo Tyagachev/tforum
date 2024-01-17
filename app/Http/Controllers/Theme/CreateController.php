@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Theme;
 
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CreateController extends BaseController
@@ -10,10 +9,9 @@ class CreateController extends BaseController
     /**
      * Создание сообщества
      *
-     * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     * @return View
      */
-    public function __invoke(Request $request): View
+    public function __invoke(): View
     {
         return view('pages.theme.create');
     }

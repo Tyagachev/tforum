@@ -7,7 +7,7 @@ use App\Repository\ThemeRepository;
 
 class BaseController extends Controller
 {
-    public $themeRepository;
+    public ThemeRepository $themeRepository;
 
     public function __construct(ThemeRepository $themeRepository)
     {

@@ -1,6 +1,6 @@
 @extends('pages.admin.index')
 @section('admin-content')
-    <div class="pt-2">
+    <div class="m-2">
         <div class="input-group w-75">
             <input type="search" class="form-control form-control-lg" placeholder="Введите ник пользователя">
             <div class="input-group-append" style="background-color: #e4e4e4">

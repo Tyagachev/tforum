@@ -37,4 +37,15 @@ class Theme extends Model
     {
         return $this->hasMany(Topic::class,'theme_id')->orderBy('created_at', 'DESC');
     }
+
+    /**
+     * Многие ко многим
+     * связь с тегами
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

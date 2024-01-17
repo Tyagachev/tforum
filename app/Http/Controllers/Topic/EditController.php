@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\Topic;
 
-use App\Http\Controllers\Controller;
 use App\Models\Topic;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class EditController extends BaseController

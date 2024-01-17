@@ -26,10 +26,13 @@ class Topic extends Model
     protected $fillable = [
         'title',
         'text',
+        'tag_topic',
         'view_count',
         'user_id',
         'theme_id'
     ];
+
+
 
 
 }

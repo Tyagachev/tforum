@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Topic;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Topic\TopicUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 

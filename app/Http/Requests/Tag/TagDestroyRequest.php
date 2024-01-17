@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Topic;
+namespace App\Http\Requests\Tag;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TopicStoreRequest extends FormRequest
+class TagDestroyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,7 @@ class TopicStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:40'],
-            'text' => ['required', 'string', 'max:2000'],
-            'tag_topic' => ['required', 'string'],
+            'tag_id' => ['int'],
             'theme_id' => ['int']
         ];
     }

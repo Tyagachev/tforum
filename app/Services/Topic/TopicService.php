@@ -19,6 +19,7 @@ class TopicService
             'user_id' => auth()->user()->id,
             'title' => $topicData['title'],
             'text' => str_replace("\r\n",'<br>', $topicData['text']),
+            'tag_topic' => $topicData['tag_topic'],
             'theme_id' => $topicData['theme_id']
         ];
         $topic = new Topic();

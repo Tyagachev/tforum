@@ -11,16 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('topics', function (Blueprint $table) {
+        Schema::create('tag_theme', function (Blueprint $table) {
             $table->id();
-            $table->text('title');
-            $table->mediumText('text');
-            $table->text('tag_topic');
-            $table->bigInteger('view_count')->default(0);
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('theme_id');
-            $table->foreign('theme_id')->references('id')
-                ->on('themes')
+            $table->unsignedBigInteger('tag_id');
+            $table->foreign('theme_id')->references('id')->on('themes');
+            $table->foreign('tag_id')->references('id')->on('tags')
                 ->onDelete('cascade');
             $table->timestamps();
         });
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('topics');
+        Schema::dropIfExists('topics_tags');
     }
 };

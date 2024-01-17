@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class IndexController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Страница админки
+     *
+     * @return View
      */
-    public function __invoke(Request $request)
+    public function __invoke(): View
     {
         return view('pages.admin.index');
     }

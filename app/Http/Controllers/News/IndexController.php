@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\News;
 
-use App\Http\Controllers\Controller;
-use App\Models\News;
 use Illuminate\View\View;
 
 class IndexController extends BaseController

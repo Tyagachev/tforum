@@ -8,8 +8,8 @@ use App\Services\User\UserService;
 
 class BaseController extends Controller
 {
-    public $repository;
-    public $service;
+    public UserListRepository $repository;
+    public UserService $service;
 
     public function __construct(UserListRepository $repository, UserService $service)
     {

@@ -4,13 +4,16 @@ namespace App\Http\Controllers\Admin\UserList;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CreateController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Страница создания пользователя
+     *
+     * @return View
      */
-    public function __invoke()
+    public function __invoke(): View
     {
         return view('pages.admin.userList.create');
     }

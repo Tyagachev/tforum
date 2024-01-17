@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers\Theme;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Theme\ThemeDestroyRequest;
-use App\Http\Requests\Topic\TopicDestroyRequest;
-use Illuminate\Http\Request;
 
 class DestroyController extends BaseController
 {

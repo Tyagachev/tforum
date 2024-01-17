@@ -4,14 +4,17 @@ namespace App\Http\Controllers\Raiting;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ShowController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Просмотр постов пользователя
+     *
+     * @param User $user
+     * @return View
      */
-    public function __invoke(User $user)
+    public function __invoke(User $user): View
     {
         $userTopics = $user->topics;
         return view('pages.raiting.userTopics',[$user], compact('user','userTopics'));

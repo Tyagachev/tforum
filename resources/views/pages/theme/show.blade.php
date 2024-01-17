@@ -10,7 +10,9 @@
                     <div>
                         <h3 class="text">{{ $theme->title }}</h3>
                         <h5 class="text">{{ $theme->subtitle }}</h5>
-                        @can('view', auth()->user())<a href="{{ route('edit.theme', $theme) }}">Редактировать</a>@endcan
+                        @can('view', auth()->user())
+                            <a href="{{ route('edit.theme', $theme) }}">Редактировать</a>
+                        @endcan
                     </div>
                 </div>
                 <div class="pt-4">
@@ -30,6 +32,23 @@
                     </div>
                 @endif
             <hr style="color: #fff">
+                <p class="tab_text-gold p-1">Фильтр по тегам:</p>
+                <div class="d-flex flex-wrap">
+                    <div class="p-1">
+                        <form action="{{ route('show.theme', $theme->id) }}" method="GET">
+                            <button class="btn btn-light" type="submit">Все</button>
+                        </form>
+                    </div>
+                    @foreach($tags as $tag)
+                        <div class="p-1">
+                            <form action="{{ route('search.theme') }}" method="GET">
+                                <input type="hidden" name="theme_id" value="{{ $theme->id }}">
+                                <input type="hidden" name="tag_name" value="{{ $tag->name }}">
+                                <button class="btn btn-light" type="submit">{{ $tag->name }}</button>
+                            </form>
+                        </div>
+                    @endforeach
+                </div>
             @if(empty($themeTopics))
                 <h1 class="text">Записей пока нет :)</h1>
             @else
@@ -37,9 +56,15 @@
                     <thead class="thead">
                     <tr>
                         <th class="th_col" scope="col"><span class="tab_text-gold">Тема</span></th>
+                        <th class="th_col" scope="col"><span class="tab_text-gold">Тег</span></th>
                         <th class="th_col" scope="col"><span class="tab_text-gold">Автор</span></th>
                         <th class="th_col" scope="col"><span class="tab_text-gold">Создан</span></th>
-                        <th class="th_col" scope="col"><span class="tab_text-gold">Просмотры</span></th>
+                        <th class="th_col" scope="col"><span class="tab_text-gold">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/><path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+</svg>
+                            </span>
+                        </th>
                         <th class="th_col" scope="col"><span class="tab_text-gold">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-text" viewBox="0 0 16 16">
                                     <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
@@ -53,6 +78,7 @@
                         <tbody>
                         <tr onclick="window.location.href='{{ route('show.topic', $topic) }}'" class="tr_row">
                             <td class="td_row"><div style="word-wrap: break-word"><span class="tab_text-title">{{ $topic->title }}</span></div></td>
+                            <td class="td_row"><div style="word-wrap: break-word"><span class="tab_text-title">{{ $topic->tag_topic }}</span></div></td>
                             <td class="td_row"><span class="tab_text">{{ \App\Models\User::find($topic->user_id)->name }}</span></td>
                             <td class="td_row"><span class="tab_text">{{ $topic->created_at->format('d.m.Y') }}</span></td>
                             <td class="td_row"><span class="tab_text">{{ $topic->view_count }}</span></td>
