@@ -175,6 +175,24 @@ textarea::-webkit-scrollbar {
     height: 0;
 }
 
+table{
+    table-layout: fixed;
+}
+td{
+    word-wrap:break-word
+}
+
+@media (min-width: 425px) and (max-width: 768px){
+    .th_col-hidden {
+        display: none;
+    }
+}
+
+@media (min-width: 425px) and (max-width: 768px){
+    .td_row-hidden {
+        display: none;
+    }
+}
 .text_color {
     color: #ffffff;
 }
@@ -227,6 +245,7 @@ textarea::-webkit-scrollbar {
     padding: 4px;
     border: 0.5px solid gray;
     display: flex;
+    margin: 5px;
 }
 
 .theme_image-block {
@@ -346,3 +365,4 @@ textarea::-webkit-scrollbar {
     background-color: #44444475;
     color: #0ed529;
 }
+

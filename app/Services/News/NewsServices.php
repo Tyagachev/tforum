@@ -16,7 +16,7 @@ class NewsServices
         $store = [
             'title' => $data['title'],
             'subtitle' => $data['subtitle'],
-            'text' => str_replace("\r\n",'<br>',  $data['text']),
+            'text' => str_replace("\r\n",'<br><br>',  $data['text']),
             'image' => $saveFile
         ];
 

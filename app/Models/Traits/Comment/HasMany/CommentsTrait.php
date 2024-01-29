@@ -3,6 +3,7 @@
 namespace App\Models\Traits\Comment\HasMany;
 
 use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 trait CommentsTrait
@@ -19,5 +20,10 @@ trait CommentsTrait
     {
         return $this->hasMany(Comment::class)->whereNull('parent_id');
 
+    }
+
+    public function replies(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'parent_id');
     }
 }

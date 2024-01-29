@@ -1,6 +1,6 @@
 @extends('pages.admin.index')
 @section('admin-content')
-    <div class="m-2">
+    <div class="container">
         <div class="input-group w-75">
             <input type="search" class="form-control form-control-lg" placeholder="Введите ник пользователя">
             <div class="input-group-append" style="background-color: #e4e4e4">
@@ -31,7 +31,7 @@
             <td onclick="window.location.href='{{ route('admin.user-list.show',$list->id) }}'"><a href="{{ route('admin.user-list.show',$list->id) }}">{{ $list->name }}</td>
             <td>{{ $list->email }}</td>
             <td>{{ $list->role }}</td>
-            <td>{{ $list->created_at }}</td>
+            <td>{{ $list->created_at->format('d.m.Y') }}</td>
         </tr>
         @endforeach
         </tbody>

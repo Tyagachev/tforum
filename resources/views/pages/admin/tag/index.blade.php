@@ -29,8 +29,8 @@
             <tbody>
             @foreach($result as $res)
                 <tr>
-                    <td>{{ $res->theme_name }}</td>
-                    <td>{{ $res->tag_name }}</td>
+                    <td>{{ $res->title }}</td>
+                    <td>{{ $res->name }}</td>
                     <td>
                         <form action="{{ route('admin.tag.delete') }}" method="POST">
                             @csrf

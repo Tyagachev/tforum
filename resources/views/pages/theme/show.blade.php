@@ -32,6 +32,19 @@
                     </div>
                 @endif
             <hr style="color: #fff">
+                <div class="input-group w-75">
+                    <form class="d-flex w-75" action="{{ route('search.theme.input') }}" method="GET">
+                        <input type="hidden" name="theme_id" value="{{ $theme->id }}">
+                        <input type="text" name="theme_name" class="form-control form-control-lg rounded-0" placeholder="Название темы">
+                        <div class="input-group-append" style="background-color: #e4e4e4">
+                            <button type="submit" class="btn btn-lg btn-default">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
                 <p class="tab_text-gold p-1">Фильтр по тегам:</p>
                 <div class="d-flex flex-wrap">
                     <div class="p-1">
@@ -58,7 +71,7 @@
                         <th class="th_col" scope="col"><span class="tab_text-gold">Тема</span></th>
                         <th class="th_col" scope="col"><span class="tab_text-gold">Тег</span></th>
                         <th class="th_col" scope="col"><span class="tab_text-gold">Автор</span></th>
-                        <th class="th_col" scope="col"><span class="tab_text-gold">Создан</span></th>
+                        <th class="th_col th_col-hidden" scope="col"><span class="tab_text-gold">Создан</span></th>
                         <th class="th_col" scope="col"><span class="tab_text-gold">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                 <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/><path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
@@ -77,10 +90,10 @@
                     @foreach($themeTopics as $topic)
                         <tbody>
                         <tr onclick="window.location.href='{{ route('show.topic', $topic) }}'" class="tr_row">
-                            <td class="td_row"><div style="word-wrap: break-word"><span class="tab_text-title">{{ $topic->title }}</span></div></td>
-                            <td class="td_row"><div style="word-wrap: break-word"><span class="tab_text-title">{{ $topic->tag_topic }}</span></div></td>
+                            <td class="td_row" style="word-wrap: break-word"><span class="tab_text-title">{{ $topic->title }}</span></td>
+                            <td class="td_row"><span class="tab_text-title">{{ $topic->tag_topic }}</span></td>
                             <td class="td_row"><span class="tab_text">{{ \App\Models\User::find($topic->user_id)->name }}</span></td>
-                            <td class="td_row"><span class="tab_text">{{ $topic->created_at->format('d.m.Y') }}</span></td>
+                            <td class="td_row td_row-hidden"><span class="tab_text">{{ $topic->created_at->format('d.m.Y') }}</span></td>
                             <td class="td_row"><span class="tab_text">{{ $topic->view_count }}</span></td>
                             <td class="td_row"><span class="tab_text">{{ \App\Models\Topic::query()->find($topic->id)->comments()->count() }}</span></td>
                         </tr>

@@ -8,8 +8,6 @@
                 <span class="bg-success">{{ session('error') }}</span>
             @endif
             <div>
-                <p>{{ $user->id }}</p>
-                <p>{{ $user->avatar->user_id }}</p>
                 @if($user->avatar->image)
                     <div class="d-flex flex-column align-items-center">
                         <div class="mb-4">
@@ -23,19 +21,22 @@
                             <button class="btn btn-danger" type="submit">Удалить аватар</button>
                         </form>
                         @endcan
-                        <div class="pt-2">
-                            <p class="text">{{ $user->name }}</p>
-                        </div>
-                        <div class="pt-2">
-                            <p class="text">На форуме с {{ $user->created_at->format('d.m.Y') }}</p>
-                        </div>
                     </div>
                 @else
             </div>
-                <div class="d-flex flex-column align-items-center">
+                <div class="d-flex flex-column align-items-center p-2">
+                    <img style="width: 60px;" src="{{ asset('img/person.svg') }}" alt="">
                     @include('pages.avatar.create')
                 </div>
                @endif
+                <div class="d-flex flex-column align-items-center">
+                    <div class="pt-2">
+                        <p class="text">{{ $user->name }}</p>
+                    </div>
+                    <div class="pt-2">
+                        <p class="text">На форуме с {{ $user->created_at->format('d.m.Y') }}</p>
+                    </div>
+                </div>
                 <hr style="color:#ffff">
             <div class="d-flex justify-content-center mt-5">
                 <div class="w-50">

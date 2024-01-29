@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Theme;
+namespace App\Http\Controllers\Topic;
 
+use App\Http\Controllers\Theme\BaseController;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class SearchController extends BaseController
+class TagSearchController extends BaseController
 {
     /**
      * Осуществляет фильтрацию топиков по тегу

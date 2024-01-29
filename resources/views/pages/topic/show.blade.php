@@ -14,7 +14,11 @@
                 <div class="topic_card">
                 <div class="d-flex">
                     <div style="border: 1px solid gold; width: 100px; height: 100px; float:right; margin: 0 10px 0 10px">
-                        <img style="width: 100px; height: 100px;" src="{{ url(('storage/' . \App\Models\User::query()->find($topicObject->user_id)->avatar->image)) }}" alt="">
+                        @if(\App\Models\User::query()->find($topicObject->user_id)->avatar->image)
+                            <img style="width: 100px; height: 100px;" src="{{ url(('storage/' . \App\Models\User::query()->find($topicObject->user_id)->avatar->image)) }}" alt="">
+                        @else
+                            <img style="width: 100px; height: 100px;" src="{{ asset('img/person.svg') }}" alt="">
+                        @endif
                     </div>
                     <div class="w-100">
                         <div style="word-break: break-all">

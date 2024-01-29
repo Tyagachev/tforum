@@ -57,7 +57,6 @@ Route::namespace(RouteServiceProvider::NAMESPACE . 'News')->group(function() {
 /*Theme*/
 Route::namespace(RouteServiceProvider::NAMESPACE . 'Theme')->group(function () {
     Route::get('/theme/show/{theme}', 'ShowController')->name('show.theme');
-    Route::get('/theme/search/', 'SearchController')->name('search.theme');
     Route::middleware(['middleware' => 'admin'])->group(function () {
         Route::get('/theme/create', 'CreateController')->name('create.theme');
         Route::post('/theme/store', 'StoreController')->name('store.theme');
@@ -70,6 +69,8 @@ Route::namespace(RouteServiceProvider::NAMESPACE . 'Theme')->group(function () {
 /*Topics*/
 Route::namespace(RouteServiceProvider::NAMESPACE . 'Topic')->group(function () {
     Route::get('/topic/show/{topic}', 'ShowController')->name('show.topic');
+    Route::get('/theme/search/', 'TagSearchController')->name('search.theme');
+    Route::get('/theme/search/input', 'InputSearchController')->name('search.theme.input');
     Route::middleware(['middleware' => 'auth'])->group(function () {
         Route::get('/topic/create/{id}', 'CreateController')->name('create.topic');
         Route::get('/topic/edit/{topic}', 'EditController')->name('edit.topic');
@@ -83,6 +84,12 @@ Route::namespace(RouteServiceProvider::NAMESPACE . 'Topic')->group(function () {
 Route::namespace(RouteServiceProvider::NAMESPACE . 'Comment')->group(function () {
     Route::post('/comment/store', 'StoreController')->name('comment.store');
     Route::delete('/comment/delete', 'DestroyController')->name('comment.delete');
+});
+
+/*Like*/
+Route::namespace(RouteServiceProvider::NAMESPACE . 'Like')->group(function () {
+    Route::get('/like/{id}', [\App\Http\Controllers\Like\LikeController::class,'index'] , function () {})->name('like.index');
+    Route::get('/like/{id}/api', [\App\Http\Controllers\Like\LikeController::class, 'show'])->name('like.show');
 });
 
 /*Создание storage:link*/

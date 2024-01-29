@@ -31,4 +31,5 @@ class Comment extends Model
         'parent_id'
     ];
 
+
 }
