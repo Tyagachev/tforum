@@ -33,7 +33,7 @@
                 @endif
             <hr style="color: #fff">
                 <div class="input-group w-75">
-                    <form class="d-flex w-75" action="{{ route('search.theme.input') }}" method="GET">
+                    <form class="d-flex w-75" action="{{ route('topic.search.input') }}" method="GET">
                         <input type="hidden" name="theme_id" value="{{ $theme->id }}">
                         <input type="text" name="theme_name" class="form-control form-control-lg rounded-0" placeholder="Название темы">
                         <div class="input-group-append" style="background-color: #e4e4e4">
@@ -54,7 +54,7 @@
                     </div>
                     @foreach($tags as $tag)
                         <div class="p-1">
-                            <form action="{{ route('search.theme') }}" method="GET">
+                            <form action="{{ route('topic.tag.search') }}" method="GET">
                                 <input type="hidden" name="theme_id" value="{{ $theme->id }}">
                                 <input type="hidden" name="tag_name" value="{{ $tag->name }}">
                                 <button class="btn btn-light" type="submit">{{ $tag->name }}</button>
@@ -92,7 +92,9 @@
                         <tr onclick="window.location.href='{{ route('show.topic', $topic) }}'" class="tr_row">
                             <td class="td_row" style="word-wrap: break-word"><span class="tab_text-title">{{ $topic->title }}</span></td>
                             <td class="td_row"><span class="tab_text-title">{{ $topic->tag_topic }}</span></td>
-                            <td class="td_row"><span class="tab_text">{{ \App\Models\User::find($topic->user_id)->name }}</span></td>
+                            <td class="td_row"><span class="tab_text">{{ (\App\Models\User::find($topic->user_id)) ?
+                            \App\Models\User::findOrFail($topic->user_id)->name : '---' }}</span>
+                            </td>
                             <td class="td_row td_row-hidden"><span class="tab_text">{{ $topic->created_at->format('d.m.Y') }}</span></td>
                             <td class="td_row"><span class="tab_text">{{ $topic->view_count }}</span></td>
                             <td class="td_row"><span class="tab_text">{{ \App\Models\Topic::query()->find($topic->id)->comments()->count() }}</span></td>

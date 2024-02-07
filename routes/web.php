@@ -9,17 +9,20 @@ use App\Http\Middleware\AdminMiddleware;
 /**
  * Routing
  */
-
 Auth::routes();
 //Auth::routes(['verify' => true]);
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
 
-/*Welcome*/
+/**
+ * Welcome
+ */
 Route::namespace(RouteServiceProvider::NAMESPACE . 'Welcome')->group(function() {
     Route::get('/','IndexController')->name('welcome');
 });
 
-/*Avatar*/
+/**
+ * Avatar
+ */
 Route::namespace(RouteServiceProvider::NAMESPACE . 'Avatar')->group(function() {
     Route::middleware(['middleware' => 'auth'])->group(function () {
         Route::post('/avatar/store','StoreController')->name('avatar.store');
@@ -27,19 +30,25 @@ Route::namespace(RouteServiceProvider::NAMESPACE . 'Avatar')->group(function() {
     });
 });
 
-/*Raiting*/
+/**
+ * Raiting
+ */
 Route::namespace(RouteServiceProvider::NAMESPACE . 'Raiting')->group(function() {
     Route::get('/raiting/posts/user/{user}','ShowController')->name('raiting.posts');
 });
 
-/*Profile*/
+/**
+ * Profile
+ */
 Route::namespace(RouteServiceProvider::NAMESPACE . 'Profile')->group(function() {
     Route::get('/profile/{user}','IndexController')->name('profile.index');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-/*News*/
+/**
+ * News
+ */
 Route::namespace(RouteServiceProvider::NAMESPACE . 'News')->group(function() {
     Route::get('/news', 'IndexController')->name('index.news');
     Route::get('/news/show/{news}', 'ShowController')->name('show.news');
@@ -54,7 +63,9 @@ Route::namespace(RouteServiceProvider::NAMESPACE . 'News')->group(function() {
     });
 });
 
-/*Theme*/
+/**
+ * Theme
+ */
 Route::namespace(RouteServiceProvider::NAMESPACE . 'Theme')->group(function () {
     Route::get('/theme/show/{theme}', 'ShowController')->name('show.theme');
     Route::middleware(['middleware' => 'admin'])->group(function () {
@@ -66,11 +77,13 @@ Route::namespace(RouteServiceProvider::NAMESPACE . 'Theme')->group(function () {
     });
 });
 
-/*Topics*/
+/**
+ * Topics
+ */
 Route::namespace(RouteServiceProvider::NAMESPACE . 'Topic')->group(function () {
     Route::get('/topic/show/{topic}', 'ShowController')->name('show.topic');
-    Route::get('/theme/search/', 'TagSearchController')->name('search.theme');
-    Route::get('/theme/search/input', 'InputSearchController')->name('search.theme.input');
+    Route::get('/topic/search', 'TagSearchController')->name('topic.tag.search');
+    Route::get('/topic/search/input', 'InputSearchController')->name('topic.search.input');
     Route::middleware(['middleware' => 'auth'])->group(function () {
         Route::get('/topic/create/{id}', 'CreateController')->name('create.topic');
         Route::get('/topic/edit/{topic}', 'EditController')->name('edit.topic');
@@ -80,35 +93,30 @@ Route::namespace(RouteServiceProvider::NAMESPACE . 'Topic')->group(function () {
     });
 });
 
-/*Comments*/
+/**
+ * Comments
+ */
 Route::namespace(RouteServiceProvider::NAMESPACE . 'Comment')->group(function () {
     Route::post('/comment/store', 'StoreController')->name('comment.store');
     Route::delete('/comment/delete', 'DestroyController')->name('comment.delete');
 });
 
-/*Like*/
-Route::namespace(RouteServiceProvider::NAMESPACE . 'Like')->group(function () {
-    Route::get('/like/{id}', [\App\Http\Controllers\Like\LikeController::class,'index'] , function () {})->name('like.index');
-    Route::get('/like/{id}/api', [\App\Http\Controllers\Like\LikeController::class, 'show'])->name('like.show');
-});
-
-/*Создание storage:link*/
-Route::get('/foo', function () {
-    Artisan::call('storage:link');
-    return redirect()->back();
-});
-
-/*Admin*/
+/**
+ * Admin
+ */
 Route::middleware(['middleware' => 'admin'])->group(function () {
     Route::namespace(RouteServiceProvider::NAMESPACE . 'Admin')->group(function() {
         Route::get('/admin','IndexController')->name('admin.index');
     });
 });
 
-/*Admin\UserList*/
+/**
+ * Admin\UserList
+ */
 Route::middleware(['middleware' => 'admin'])->group(function () {
     Route::namespace(RouteServiceProvider::NAMESPACE . 'Admin\UserList')->group(function() {
         Route::get('/user-list','IndexController')->name('admin.user-list');
+        Route::get('/user-list/search','SearchUserController')->name('admin.user-list.search');
         Route::get('/user-list/show/{user}','ShowController')->name('admin.user-list.show');
         Route::get('/user-list/create', 'CreateController')->name('admin.user-list.create');
         Route::post('/user-list/store', 'StoreController')->name('admin.user-list.store');
@@ -116,13 +124,23 @@ Route::middleware(['middleware' => 'admin'])->group(function () {
     });
 });
 
-/*Admin\Tag*/
+/**
+ * Admin\Tag
+ */
 Route::middleware(['middleware' => 'admin'])->group(function () {
     Route::namespace(RouteServiceProvider::NAMESPACE . 'Admin\Tag')->group(function() {
         Route::get('/tag','IndexController')->name('admin.tag.index');
         Route::post('/tag/store','StoreController')->name('admin.tag.store');
         Route::delete('/tag/delete','DestroyController')->name('admin.tag.delete');
     });
+});
+
+/**
+ * Создание storage:link
+ */
+Route::get('/foo', function () {
+    Artisan::call('storage:link');
+    return redirect()->back();
 });
 
 

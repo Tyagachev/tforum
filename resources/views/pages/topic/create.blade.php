@@ -30,6 +30,7 @@
                     <label for=""><span class="tab_text-gold">Добавьте тег:</span><span class="text-danger">*</span></label>
                     <div class="form-group pt-2">
                     <select class="form-select w-50" id="teg-select" name="tag_topic" required>
+                        <option value="">--Выберите тег--</option>
                     @foreach($themeTags as $tag)
                             <option value="{{ $tag->name }}">{{ $tag->name }}</option>
                     @endforeach

@@ -31,7 +31,7 @@
                 </div>
                 <div class="mb-4">
                     @if(auth()->user())
-                        <p class="accordion">Ответить</p>
+                        @if($topicObject->user_id != auth()->user()->id)<p class="accordion">Ответить</p>@endif
                         <div class="panel">
                             <form action="{{ route('comment.store') }}" method="POST">
                                 <div class="d-flex">

@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use App\Models\Traits\Comment\HasMany\RepliesTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Comment extends Model
 {
     use HasFactory;
-    use RepliesTrait; // трейт с методами ответов на комментарии
 
     /**
      * Таблица comments
@@ -30,6 +29,17 @@ class Comment extends Model
         'topic_id',
         'parent_id'
     ];
+
+    /**
+     * Связь один ко многим
+     * с таблицей комментов
+     *
+     * @return HasMany
+     */
+    public function replies(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'parent_id')->latest();
+    }
 
 
 }

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Traits\Comment\HasMany\CommentsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -10,7 +9,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Topic extends Model
 {
     use HasFactory;
-    use CommentsTrait;
 
     /**
      * Таблица topics
@@ -32,4 +30,18 @@ class Topic extends Model
         'user_id',
         'theme_id'
     ];
+
+    /**
+     * Связь один ко многим
+     * с таблицей комментов
+     * whereNull('parent_id') - фильтрует по столбцу 'parent_id'
+     * который равен null
+     *
+     * @return HasMany
+     */
+    public function comments(): hasMany
+    {
+        return $this->hasMany(Comment::class)->whereNull('parent_id')->latest();
+
+    }
 }
