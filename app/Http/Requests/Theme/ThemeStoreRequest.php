@@ -22,8 +22,8 @@ class ThemeStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string'],
-            'subtitle' => ['required', 'string'],
+            'title' => ['required', 'string', 'max:40'],
+            'subtitle' => ['required', 'string', 'max:2000'],
             'image' => ['required', 'image']
         ];
     }

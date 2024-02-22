@@ -1,3 +1,4 @@
+@if(auth()->user()->id == $user->id)
 <div class="mt-2">
     <form class="d-flex flex-column align-center" action="{{ route('avatar.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -6,3 +7,4 @@
         <button class="btn btn-success" type="submit">Загрузить</button>
     </form>
 </div>
+@endif

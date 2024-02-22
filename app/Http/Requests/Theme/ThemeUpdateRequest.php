@@ -22,9 +22,9 @@ class ThemeUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' =>['int'],
-            'title' => ['required', 'string'],
-            'subtitle' => ['required', 'string']
+            'id' => ['int'],
+            'title' => ['required', 'string', 'max:40'],
+            'subtitle' => ['required', 'string', 'max:2000']
         ];
     }
 }

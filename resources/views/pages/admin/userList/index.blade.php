@@ -1,7 +1,8 @@
 @extends('pages.admin.index')
 @section('admin-content')
     <div class="container">
-        <div class="input-group w-75">
+        <h4>Список пользователей</h4>
+        <div class="input-group w-75 m-1">
             <form class="d-flex w-75" action="{{ route('admin.user-list.search') }}" method="GET">
                 <input type="text" name="user_name" class="form-control form-control-lg rounded-0" placeholder="Ник пользователя">
                 <div class="input-group-append" style="background-color: #e4e4e4">

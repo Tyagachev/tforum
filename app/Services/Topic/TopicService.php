@@ -18,7 +18,7 @@ class TopicService
         $saveData = [
             'user_id' => auth()->user()->id,
             'title' => $topicData['title'],
-            'text' => str_replace("\r\n",'<br>', $topicData['text']),
+            'text' => str_replace("\r\n",'<br><br>', $topicData['text']),
             'tag_topic' => $topicData['tag_topic'],
             'theme_id' => $topicData['theme_id']
         ];
@@ -40,7 +40,7 @@ class TopicService
     {
         $update = [
             'title' => $topicValidate['title'],
-            'text' => str_replace("\r\n",'<br>', $topicValidate['text'])
+            'text' => str_replace("\r\n",'<br><br>', $topicValidate['text'])
         ];
         $search = Topic::query()->findOrFail($topicValidate['id']);
         if($search->update($update)) {

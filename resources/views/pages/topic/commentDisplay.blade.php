@@ -5,17 +5,19 @@
                 <div class="comment-wrp">
                     @if($comment->parent_id == null)
                         <div class="profile d-flex justify-content-between">
-                            <div class="d-flex">
-                            @if(\App\Models\User::query()->findOrFail($comment->user_id)->avatar->image)
-                                    <img style="width: 100px; height: 100px; margin-right: 10px;" src="{{ url(('storage/' . \App\Models\User::query()->find($comment->user_id)->avatar->image)) }}" alt="">
-                            @else
-                                    <img style="width: 60px; margin-right: 10px;" src="{{ asset('img/person.svg') }}" alt="">
-                            @endif
-                            <p class="text">{{ \App\Models\User::query()->findOrFail($comment->user_id)->name }}</p>
-                            </div>
+                            <a style="text-decoration: none" href="{{ route('profile.index', $comment->user_id) }}">
+                                <div class="d-flex">
+                                @if($comment->user->avatar->image)
+                                        <img style="width: 100px; height: 100px; margin-right: 10px; border: gold 1px solid;" src="{{ url(('storage/' . $comment->user->avatar->image)) }}" alt="">
+                                @else
+                                        <img style="width: 60px; margin-right: 10px; border: gold 1px solid;" src="{{ asset('img/person.svg') }}" alt="">
+                                @endif
+                                <p class="text">{{ $comment->user->name }}</p>
+                                </div>
+                            </a>
                             <div class="d-flex flex-column mb-1">
-                                <p class="text">{{ $comment->created_at->format('d.m.Y') }}</p>
-                                @can('deleteComment', \App\Models\Comment::query()->findOrFail($comment->id))
+                                <p class="text">{{ $comment->dateAsCarbon->diffForHumans() }}</p>
+                                @can('deleteComment', $comment->getCommentData($comment->id))
                                     <form action="{{ route('comment.delete') }}" method="POST">
                                         @csrf
                                         @method('delete')
@@ -27,7 +29,7 @@
                         </div>
                         <p class="tab_text-gold">Комментарий к посту:</p>
                         <div style="background-color: #555d70; padding: 10px; border: 1px solid white">
-                            {!! \App\Models\Topic::query()->findOrFail($comment->topic_id)->text !!}
+                            {!! $comment->topic->text !!}
                         </div>
                         <div>
                             <p class="text">{!! $comment->text !!}</p>
@@ -37,17 +39,17 @@
                             <div class="d-flex justify-content-between">
                                 <a style="text-decoration: none" href="{{ route('profile.index', $comment->user_id) }}">
                                     <div class="profile d-flex">
-                                            @if(\App\Models\User::query()->findOrFail($comment->user_id)->avatar->image)
-                                                <img style="width: 100px; height: 100px; margin-right: 10px;" src="{{ url('storage/' . \App\Models\User::query()->find($comment->user_id)->avatar->image) }}" alt="">
+                                            @if($comment->user->avatar->image)
+                                                <img style="width: 100px; height: 100px; margin-right: 10px; border: gold 1px solid;" src="{{ url('storage/' . $comment->user->avatar->image) }}" alt="">
                                             @else
-                                                <img style="width: 60px; margin-right: 10px;" src="{{ asset('img/person.svg') }}" alt="">
+                                                <img style="width: 60px; margin-right: 10px; border: gold 1px solid;" src="{{ asset('img/person.svg') }}" alt="">
                                             @endif
-                                            <p class="text">{{ \App\Models\User::query()->findOrFail($comment->user_id)->name }}</p>
+                                            <p class="text">{{ $comment->user->name }}</p>
                                     </div>
                                 </a>
                                 <div class="d-flex flex-column mb-1">
-                                    <p class="text">{{ $comment->created_at }}</p>
-                                    @can('deleteComment', \App\Models\Comment::query()->findOrFail($comment->id))
+                                    <p class="text">{{ $comment->dateAsCarbon->diffForHumans() }}</p>
+                                    @can('deleteComment', $comment)
                                         <form action="{{ route('comment.delete') }}" method="POST">
                                             @csrf
                                             @method('delete')
@@ -61,15 +63,15 @@
                         <div style="background-color: #555d70;padding: 10px; border: 1px solid white">
                         <div class="d-flex">
                             <div style="margin-right: 10px">
-                                @if(\App\Models\User::query()->findOrFail($comment->reply_user_id)->avatar->image)
-                                    <img style="width: 60px" src="{{ url('storage/' . \App\Models\User::query()->find($comment->reply_user_id)->avatar->image) }}" alt="">
+                                @if($comment->user->avatar->image)
+                                    <img style="width: 60px" src="{{ url('storage/' . $comment->user->avatar->image) }}" alt="">
                                 @else
                                     <img style="width: 60px;" src="{{ asset('img/person.svg') }}" alt="">
                                 @endif
                             </div>
                             <div>
-                                <p>{{ \App\Models\User::query()->findOrFail($comment->reply_user_id)->name }}</p>
-                                <p class="text">{!! \App\Models\Comment::query()->findOrFail($comment->parent_id)->text !!}</p>
+                                <p>{{ $comment->getReplyUserName($comment->reply_user_id) }}</p>
+                                <p class="text">{!! $comment->getCommentData($comment->parent_id)->text !!}</p>
                             </div>
                         </div>
                     </div>
@@ -85,7 +87,7 @@
                                 <form action="{{ route('comment.store') }}" method="POST">
                                     @csrf
                                     <div style="display: flex; margin-bottom: 10px">
-                                        <textarea class="textarea_style" name="text" id="" cols="30" rows="2" placeholder="Комментарий" required></textarea>
+                                        <textarea class="textarea_style" name="text" id="" cols="30" rows="2" placeholder="Комментарий" required>{{ old('text') }}</textarea>
                                         <input type="hidden" name="topic_id" value="{{ $topic_id }}">
                                         <input type="hidden" name="reply_user_id" value="{{ $comment->user_id }}">
                                         <input type="hidden" name="parent_id" value="{{ $comment->id }}">

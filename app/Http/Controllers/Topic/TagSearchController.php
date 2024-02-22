@@ -21,8 +21,10 @@ class TagSearchController extends BaseController
         $input = $request->all();
         $theme = $this->repository->getOneObj($input['theme_id']);
         $themeTopics = Topic::query()
-            ->where('tag_topic', '=', $input['tag_name'])
-            ->where('theme_id', '=', $input['theme_id'])->get();
+            ->where('tag_topic', $input['tag_name'])
+            ->where('theme_id', $input['theme_id'])
+            ->orderBy('created_at', 'desc')
+            ->get();
         $tags = $theme->tags;
         return view('pages.theme.show',[$theme], compact('theme','themeTopics', 'tags'));
     }

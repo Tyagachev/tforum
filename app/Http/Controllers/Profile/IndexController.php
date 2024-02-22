@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers\Profile;
 
+use App\Models\Comment;
 use App\Models\User;
+use Illuminate\View\View;
 
 class IndexController extends BaseController
 {
 
     /**
-     * Страница профиля
+     * Страница профиля пользователя
      *
      * @param User $user
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     * @return View
      */
-    public function __invoke(User $user)
+    public function __invoke(User $user): View
     {
-        return view('pages.profile.index', [$user], compact('user'));
+        $userCommentsCount = Comment::query()->where('user_id', $user->id)->get();
+
+        return view('pages.profile.index', [$user],
+            compact('user', 'userCommentsCount'));
     }
 }

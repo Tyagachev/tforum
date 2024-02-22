@@ -52,7 +52,7 @@ class NewsServices
         $update = [
             'title' => $data['title'],
             'subtitle' => $data['subtitle'],
-            'text' => str_replace("\r\n",'<br>', $data['text'])
+            'text' => str_replace("\r\n",'<br><br>', $data['text'])
         ];
 
         $search = News::query()->find($data['id']);

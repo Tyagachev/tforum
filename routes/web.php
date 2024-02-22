@@ -19,6 +19,10 @@ Auth::routes();
 Route::namespace(RouteServiceProvider::NAMESPACE . 'Welcome')->group(function() {
     Route::get('/','IndexController')->name('welcome');
 });
+/**
+ * Home
+ */
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /**
  * Avatar
@@ -42,9 +46,9 @@ Route::namespace(RouteServiceProvider::NAMESPACE . 'Raiting')->group(function() 
  */
 Route::namespace(RouteServiceProvider::NAMESPACE . 'Profile')->group(function() {
     Route::get('/profile/{user}','IndexController')->name('profile.index');
+    Route::delete('/profile/user/delete', 'DestroyController')
+        ->name('profile.user.delete')->middleware('auth');
 });
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 /**
  * News
@@ -52,15 +56,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::namespace(RouteServiceProvider::NAMESPACE . 'News')->group(function() {
     Route::get('/news', 'IndexController')->name('index.news');
     Route::get('/news/show/{news}', 'ShowController')->name('show.news');
-    Route::middleware([AdminMiddleware::class])->group(function() {
-        Route::middleware(['middleware' => 'admin'])->group(function () {
+        Route::middleware(['middleware' => 'admin'])->group(function() {
             Route::get('/news/create', 'CreateController')->name('create.news');
             Route::get('/news/edit/{news}', 'EditController')->name('edit.news');
             Route::patch('/news/update', 'UpdateController')->name('update.news');
             Route::delete('/news/delete', 'DestroyController')->name('delete.news');
             Route::post('/news/store', 'StoreController')->name('store.news');
         });
-    });
 });
 
 /**
@@ -78,7 +80,7 @@ Route::namespace(RouteServiceProvider::NAMESPACE . 'Theme')->group(function () {
 });
 
 /**
- * Topics
+ * Topic
  */
 Route::namespace(RouteServiceProvider::NAMESPACE . 'Topic')->group(function () {
     Route::get('/topic/show/{topic}', 'ShowController')->name('show.topic');

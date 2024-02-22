@@ -69,6 +69,17 @@ class User extends Authenticatable
     }
 
     /**
+     * Связь один ко многим
+     * комментарии пользователя
+     *
+     * @return HasMany
+     */
+    public function userComment(): hasMany
+    {
+        return $this->hasMany(Comment::class, 'user_id');
+    }
+
+    /**
      * Связь один к одному
      * аватар пользователя
      *
@@ -77,16 +88,5 @@ class User extends Authenticatable
     public function avatar(): hasOne
     {
         return $this->hasOne(Avatar::class)->withDefault();
-    }
-
-    /**
-     * Связь один ко многим
-     * комменты пользователя
-     *
-     * @return hasMany
-     */
-    public function comments(): hasMany
-    {
-        return $this->hasMany(Comment::class);
     }
 }
