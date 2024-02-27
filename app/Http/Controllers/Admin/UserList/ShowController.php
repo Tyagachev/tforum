@@ -18,6 +18,6 @@ class ShowController extends BaseController
     {
         $userObj = $this->repository->getOneObj($id);
 
-        return view('pages.admin.userList.show', [$userObj], compact('userObj'));
+        return view('pages.admin.user-list.show', [$userObj], compact('userObj'));
     }
 }

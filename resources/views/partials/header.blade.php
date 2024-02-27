@@ -3,17 +3,15 @@
                 <a class="navbar-brand text-white text-uppercase" href="{{ url('/') }}">
                     Tarisland-forum
                 </a>
+                <div>
+                    <a href="{{ route('index.news') }}"><button class="btn btn-info text-white">Новости</button></a>
+                </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                        <div>
-                            <a href="{{ route('index.news') }}"><button class="btn btn-info text-white">Новости</button></a>
-                        </div>
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">

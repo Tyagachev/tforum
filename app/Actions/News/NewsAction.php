@@ -25,7 +25,7 @@ class NewsAction
      */
     public function deleteFile(object $file): bool
     {
-        $filePath = storage_path('app/public/' . $file->image);
+        $filePath = storage_path('app/' . $file->image);
         if(unlink($filePath)) {
             return true;
         }

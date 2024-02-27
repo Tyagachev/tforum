@@ -15,6 +15,6 @@ class CreateController extends Controller
      */
     public function __invoke(): View
     {
-        return view('pages.admin.userList.create');
+        return view('pages.admin.user-list.create');
     }
 }

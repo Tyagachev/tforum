@@ -20,6 +20,6 @@ class IndexController extends BaseController
     {
         $usersList = $this->repository->getAll();
 
-        return view('pages.admin.userList.index', compact('usersList'));
+        return view('pages.admin.user-list.index', compact('usersList'));
     }
 }

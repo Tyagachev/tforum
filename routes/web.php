@@ -138,6 +138,28 @@ Route::middleware(['middleware' => 'admin'])->group(function () {
 });
 
 /**
+ * Admin\CommentList
+ */
+Route::middleware(['middleware' => 'admin'])->group(function () {
+    Route::namespace(RouteServiceProvider::NAMESPACE . 'Admin\CommentList')->group(function() {
+        Route::get('/comment-list','IndexController')->name('admin.comment-list.index');
+        Route::post('/comment-list/store','StoreController')->name('admin.comment-list.store');
+        Route::delete('/comment-list/delete','DestroyController')->name('admin.comment-list.delete');
+    });
+});
+
+/**
+ * Admin\WordCheck
+ */
+Route::middleware(['middleware' => 'admin'])->group(function () {
+    Route::namespace(RouteServiceProvider::NAMESPACE . 'Admin\WordCheck')->group(function() {
+        Route::get('/word-check','IndexController')->name('admin.word-check.index');
+        Route::post('/word-check/store','StoreController')->name('admin.word-check.store');
+        Route::delete('/word-check/delete','DestroyController')->name('admin.word-check.delete');
+    });
+});
+
+/**
  * Создание storage:link
  */
 Route::get('/foo', function () {

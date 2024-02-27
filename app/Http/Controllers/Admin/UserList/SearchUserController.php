@@ -25,7 +25,7 @@ class SearchUserController extends Controller
         if (count($usersList) == 0) {
             return redirect()->back()->with('not_found','Пользователь не найден');
         }
-        return view('pages.admin.userList.index', compact('usersList'));
+        return view('pages.admin.user-list.index', compact('usersList'));
 
     }
 }

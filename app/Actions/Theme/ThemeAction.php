@@ -28,7 +28,7 @@ class ThemeAction
      */
     public function deleteImageFile($fileName)
     {
-        $deleteFilePath = storage_path('app/public/' . $fileName->image);
+        $deleteFilePath = storage_path('app/' . $fileName->image);
         if (unlink($deleteFilePath)){
             return true;
         }

@@ -36,14 +36,16 @@
                     <div class="pt-2">
                         <p class="text">На форуме с {{ $user->created_at->format('d.m.Y') }}</p>
                     </div>
-                   @if(auth()->user()->id == $user->id)
-                    <form action="{{ route('profile.user.delete') }}" method="POST">
-                        @csrf
-                        @method('delete')
-                        <input type="hidden" name="user_id" value="{{ $user->id }}">
-                        <button type="submit" class="btn btn-danger">Удалить профиль</button>
-                    </form>
-                    @endif
+                    <div class="mt-4">
+                        @if(auth()->user()->id == $user->id)
+                            <form action="{{ route('profile.user.delete') }}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                <button type="submit" class="btn btn-danger">Удалить профиль</button>
+                            </form>
+                        @endif
+                    </div>
                 </div>
                 <hr style="color:#ffff">
             <div class="d-flex justify-content-center mt-5">

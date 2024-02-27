@@ -25,7 +25,7 @@ class AvatarAction
      */
     public function deleteFile(object $avatarObject): bool
     {
-        $filePath = storage_path('app/public/' . $avatarObject->image);
+        $filePath = storage_path('app/' . $avatarObject->image);
         if(unlink($filePath)) {
             return true;
         }
