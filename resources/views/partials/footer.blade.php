@@ -1,5 +1,5 @@
 <div class="footer">
     <div class="container">
-        <p>Footer</p>
+        <h4 style="color: white">{{ \Carbon\Carbon::now()->year }}</h4>
     </div>
 </div>

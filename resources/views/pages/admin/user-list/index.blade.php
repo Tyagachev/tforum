@@ -29,13 +29,13 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($usersList as $list)
+        @foreach($usersList as $user)
         <tr>
-            <td>{{ $list->id }}</td>
-            <td onclick="window.location.href='{{ route('admin.user-list.show',$list->id) }}'"><a href="{{ route('admin.user-list.show',$list->id) }}">{{ $list->name }}</td>
-            <td>{{ $list->email }}</td>
-            <td>{{ $list->role }}</td>
-            <td>{{ $list->created_at->format('d.m.Y') }}</td>
+            <td>{{ $user->id }}</td>
+            <td onclick="window.location.href='{{ route('admin.user-list.show',$user->id) }}'"><a href="{{ route('admin.user-list.show',$user->id) }}">{{ $user->name }}</td>
+            <td>{{ $user->email }}</td>
+            <td>{{ $user->role }}</td>
+            <td>{{ $user->created_at->format('d.m.Y') }}</td>
         </tr>
         @endforeach
         </tbody>

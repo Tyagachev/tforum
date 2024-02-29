@@ -3,12 +3,12 @@
 namespace App\Services\Topic;
 
 use App\Models\Topic;
-use App\Models\User;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class TopicService
 {
     /**
-     * Сохранение темы в БД
+     * Сохранение топика в БД
      *
      * @param array $topicData
      * @return bool
@@ -31,7 +31,7 @@ class TopicService
     }
 
     /**
-     * Обновление темы
+     * Обновление топика
      *
      * @param array $topicValidate
      * @return bool
@@ -50,7 +50,7 @@ class TopicService
     }
 
     /**
-     * Удаление темы
+     * Удаление топика
      *
      * @param array $topic
      * @return bool
@@ -62,5 +62,20 @@ class TopicService
             return true;
         }
         return false;
+    }
+
+    /**
+     * Поиск топиков с пагинацией
+     *
+     * @param $theme
+     * @param $input
+     * @return LengthAwarePaginator
+     */
+    public function querySearchTopicPagination($theme, $input): LengthAwarePaginator
+    {
+        return Topic::query()->where( 'title','like', '%' . $input['theme_name'] . '%')
+            ->where('theme_id','=', $theme->id)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(30)->withQueryString();
     }
 }

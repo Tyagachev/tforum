@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Models\Theme;
 use App\Repository\Interfaces\RepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class ThemeRepository implements RepositoryInterface
 {

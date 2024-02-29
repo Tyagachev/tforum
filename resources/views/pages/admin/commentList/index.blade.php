@@ -1,10 +1,13 @@
 @extends('pages.admin.index')
 @section('admin-content')
     <div class="container">
-        <form action="{{ route('admin.comment-list.store') }}" method="POST">
-            @csrf
-            <input type="text" name="word" class="form-control form-control-lg rounded-0 w-25" placeholder="Слово для проверки">
-            <button class="btn btn-primary mt-2" type="submit">Добавить</button>
+        <h4>Список подозрительных комментов</h4>
+        <form action="{{ route('admin.comment-list.show') }}" method="GET">
+            <p>Выберите дату:
+                <input type="date" name="today" value="{{ \Carbon\Carbon::now()->toDateString()}}">
+                <input type="date" name="tomorrow" value="{{ \Carbon\Carbon::now()->addDays(1)->toDateString() }}">
+                <button type="submit">Поиск</button>
         </form>
-    </div>
-@endsection
+    @include('pages.admin.commentList.show')
+       </div>
+   @endsection

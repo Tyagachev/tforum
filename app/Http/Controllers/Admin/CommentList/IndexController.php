@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Admin\CommentList;
 
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class IndexController extends BaseController
 {
     /**
-     * Handle the incoming request.
+     * Страница вывода фильтра комментариев
+     *
+     * @return View
      */
-    public function __invoke(Request $request)
+    public function __invoke(): View
     {
-        return view('pages.admin.commentList.index');
+        $this->commentsSuspectArray = [];
+        return view('pages.admin.commentList.index', ['commentsSuspectArray' => $this->commentsSuspectArray]);
     }
 }

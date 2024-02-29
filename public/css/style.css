@@ -366,3 +366,12 @@ td{
     color: #0ed529;
 }
 
+.pagination {
+    margin: 0;
+}
+
+.active>.page-link, .page-link.active {
+    background-color: #ffc107!important;
+}
+
+

@@ -52,15 +52,19 @@
                             <button class="btn btn-light" type="submit">Все</button>
                         </form>
                     </div>
-                    @foreach($tags as $tag)
-                        <div class="p-1">
-                            <form action="{{ route('topic.tag.search') }}" method="GET">
-                                <input type="hidden" name="theme_id" value="{{ $theme->id }}">
-                                <input type="hidden" name="tag_name" value="{{ $tag->name }}">
-                                <button class="btn btn-light" type="submit">{{ $tag->name }}</button>
-                            </form>
-                        </div>
-                    @endforeach
+                    @if(count($tags) <= 1)
+                        <div></div>
+                    @else
+                        @foreach($tags as $tag)
+                            <div class="p-1">
+                                <form action="{{ route('topic.tag.search') }}" method="GET">
+                                    <input type="hidden" name="theme_id" value="{{ $theme->id }}">
+                                    <input type="hidden" name="tag_name" value="{{ $tag->name }}">
+                                    <button class="btn btn-light" type="submit">{{ $tag->name }}</button>
+                                </form>
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
             @if(empty($themeTopics))
                 <h1 class="text">Записей пока нет :)</h1>
@@ -103,6 +107,9 @@
                     @endforeach
                     @endif
                 </table>
+                <div class="pt-3 pb-3">
+                    {{ $themeTopics->withQueryString()->links()}}
+                </div>
         </div>
     </div>
 @endsection

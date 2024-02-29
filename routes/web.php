@@ -143,7 +143,7 @@ Route::middleware(['middleware' => 'admin'])->group(function () {
 Route::middleware(['middleware' => 'admin'])->group(function () {
     Route::namespace(RouteServiceProvider::NAMESPACE . 'Admin\CommentList')->group(function() {
         Route::get('/comment-list','IndexController')->name('admin.comment-list.index');
-        Route::post('/comment-list/store','StoreController')->name('admin.comment-list.store');
+        Route::get('/comment-list/show','ShowController')->name('admin.comment-list.show');
         Route::delete('/comment-list/delete','DestroyController')->name('admin.comment-list.delete');
     });
 });

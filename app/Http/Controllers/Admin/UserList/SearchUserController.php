@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Admin\UserList;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class SearchUserController extends Controller
+class SearchUserController extends BaseController
 {
     /**
      * Поиск пользователя по никнейму
@@ -22,10 +21,10 @@ class SearchUserController extends Controller
 
         $usersList = User::query()->
         where('name','like','%' . $user['user_name'] . '%')->get();
+
         if (count($usersList) == 0) {
             return redirect()->back()->with('not_found','Пользователь не найден');
         }
         return view('pages.admin.user-list.index', compact('usersList'));
-
     }
 }
