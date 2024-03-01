@@ -8,9 +8,10 @@ use App\Models\Avatar;
 use App\Models\Comment;
 use App\Models\Topic;
 use App\Models\User;
-use App\Policies\AdminPolicy;
+use App\Policies\UserPolicy;
 use App\Policies\AvatarPolicy;
 use App\Policies\CommentPolicy;
+use App\Policies\ProfilePolicy;
 use App\Policies\TopicPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -22,10 +23,10 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        User::class => AdminPolicy::class,
+        User::class => UserPolicy::class,
         Topic::class => TopicPolicy::class,
         Comment::class => CommentPolicy::class,
-        Avatar::class => AvatarPolicy::class
+        Avatar::class => AvatarPolicy::class,
     ];
 
     /**

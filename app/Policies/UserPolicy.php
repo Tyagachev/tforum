@@ -6,12 +6,12 @@ use App\Models\Topic;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class AdminPolicy
+class UserPolicy
 {
 
 
     /**
-     * Роль админа
+     * Проверка на роль админа
      *
      * @param User $user
      * @param User $model
@@ -23,7 +23,8 @@ class AdminPolicy
     }
 
     /**
-     * Роль модер + админ
+     * Проверка на роль
+     * модер + админ
      *
      * @param User $user
      * @param User $model
@@ -32,6 +33,16 @@ class AdminPolicy
     public function moder(User $user, User $model): bool
     {
         return $user->role == 1 || $user->role == 2;
+    }
+
+    public function ViewLoadAvatarButton (User $user, $model): bool
+    {
+        return $user->id == $model->id;
+    }
+
+    public function ViewDeleteProfileButton (User $user, $model): bool
+    {
+        return $user->id == $model->id;
     }
 
 }

@@ -57,10 +57,17 @@ body {
 .admin_nav:hover {
     background-color: #7d7a7a24;
 }
-
+.avatar_border {
+    /*border: 1px solid gold;*/
+    width: 100px;
+    height: 100px;
+    float:right;
+    margin: 0 10px 20px 0
+}
 .news_wrapper {
     display: flex;
     padding:16px 0 16px 0;
+    margin: 5px 0 0 0;
     border: 1px solid gray;
     justify-content: space-between;
     align-items: center;
@@ -150,12 +157,19 @@ body {
 .textarea_style {
     width: 100%;
     border-right: 0px;
+    overflow: auto;
     resize: none;
-    background-color: aliceblue;
-    color: #000000;
-    padding: 6px;
+    /*background-color: aliceblue;*/
+    background-color: transparent;
+    color: #ffff;
+    /*padding: 6px;*/
     border-top: none;
     border-left: none;
+    margin: 10px 0 0 0;
+}
+
+.textarea_style:focus {
+    outline: none;
 }
 
 .topic_card {
@@ -374,4 +388,15 @@ td{
     background-color: #ffc107!important;
 }
 
+#text_area_div
+{
+    width: 100px;
+    font-family: Arial;
+    font-size: 12px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    visibility: hidden;
+    position: absolute;
+    left: -9999px;
+}
 

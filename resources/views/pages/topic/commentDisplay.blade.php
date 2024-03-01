@@ -15,7 +15,7 @@
                                 <p class="text">{{ $comment->user->name }}</p>
                                 </div>
                             </a>
-                            <div class="d-flex flex-column mb-1">
+                            <div class="d-flex flex-column align-items-center mb-1">
                                 <p class="text">{{ $comment->dateAsCarbon->diffForHumans() }}</p>
                                 @can('deleteComment', $comment->getCommentData($comment->id))
                                     <form action="{{ route('comment.delete') }}" method="POST">
@@ -47,7 +47,7 @@
                                             <p class="text">{{ $comment->user->name }}</p>
                                     </div>
                                 </a>
-                                <div class="d-flex flex-column mb-1">
+                                <div class="d-flex flex-column align-items-center mb-1">
                                     <p class="text">{{ $comment->dateAsCarbon->diffForHumans() }}</p>
                                     @can('deleteComment', $comment)
                                         <form action="{{ route('comment.delete') }}" method="POST">

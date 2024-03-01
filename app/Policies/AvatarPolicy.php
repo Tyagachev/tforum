@@ -16,6 +16,7 @@ class AvatarPolicy
         //
     }
 
+
     /**
      * Determine whether the user can view the model.
      */

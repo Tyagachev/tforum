@@ -2,15 +2,15 @@
 
 namespace Database\Factories;
 
-use App\Models\News;
+use App\Models\Theme;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\News>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Theme>
  */
-class NewsFactory extends Factory
+class ThemeFactory extends Factory
 {
-    protected $news = News::class;
+    protected $themes = Theme::class;
 
     /**
      * Define the model's default state.
@@ -20,9 +20,8 @@ class NewsFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->text(255),
-            'subtitle' => $this->faker->text(255),
-            'text' => $this->faker->text(10000),
+            'title' => $this->faker->text(40),
+            'subtitle' => $this->faker->text(40),
             'image' => $this->faker->image()
         ];
     }

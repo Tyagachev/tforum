@@ -37,14 +37,14 @@
                         <p class="text">На форуме с {{ $user->created_at->format('d.m.Y') }}</p>
                     </div>
                     <div class="mt-4">
-                        @if(auth()->user()->id == $user->id)
+                        @can('ViewDeleteProfileButton', $user)
                             <form action="{{ route('profile.user.delete') }}" method="POST">
                                 @csrf
                                 @method('delete')
                                 <input type="hidden" name="user_id" value="{{ $user->id }}">
                                 <button type="submit" class="btn btn-danger">Удалить профиль</button>
                             </form>
-                        @endif
+                        @endcan
                     </div>
                 </div>
                 <hr style="color:#ffff">

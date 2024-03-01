@@ -22,6 +22,7 @@
     <script defer src="{{ asset('js/toggle.js') }}"></script>
     <script defer src="{{ asset('js/uploadCheck.js') }}"></script>
     <script defer src="{{ asset('js/countLetters.js') }}"></script>
+
 <body>
     <div id="app">
             @include('partials.header')
@@ -31,4 +32,16 @@
             @include('partials.footer')
     </div>
 </body>
+<script>
+    var textarea = document.querySelectorAll('.textarea_style');
+    console.log(textarea)
+    textarea.forEach(function(ww) {
+        ww.addEventListener('keydown', function(a){
+            console.log('www')
+            if(this.scrollTop > 0){
+                this.style.height = this.scrollHeight + "px";
+            }
+        })
+    });
+</script>
 </html>

@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Middleware\AdminMiddleware;
 
 /**
  * Routing
@@ -19,6 +18,7 @@ Auth::routes();
 Route::namespace(RouteServiceProvider::NAMESPACE . 'Welcome')->group(function() {
     Route::get('/','IndexController')->name('welcome');
 });
+
 /**
  * Home
  */
@@ -117,12 +117,14 @@ Route::middleware(['middleware' => 'admin'])->group(function () {
  */
 Route::middleware(['middleware' => 'admin'])->group(function () {
     Route::namespace(RouteServiceProvider::NAMESPACE . 'Admin\UserList')->group(function() {
-        Route::get('/user-list','IndexController')->name('admin.user-list');
-        Route::get('/user-list/search','SearchUserController')->name('admin.user-list.search');
-        Route::get('/user-list/show/{user}','ShowController')->name('admin.user-list.show');
-        Route::get('/user-list/create', 'CreateController')->name('admin.user-list.create');
-        Route::post('/user-list/store', 'StoreController')->name('admin.user-list.store');
-        Route::delete('/user-list/delete', 'DestroyController')->name('admin.user-list.delete');
+        Route::prefix('admin')->group(function (){
+            Route::get('/user-list','IndexController')->name('admin.user-list');
+            Route::get('/user-list/search','SearchUserController')->name('admin.user-list.search');
+            Route::get('/user-list/show/{user}','ShowController')->name('admin.user-list.show');
+            Route::get('/user-list/create', 'CreateController')->name('admin.user-list.create');
+            Route::post('/user-list/store', 'StoreController')->name('admin.user-list.store');
+            Route::delete('/user-list/delete', 'DestroyController')->name('admin.user-list.delete');
+        });
     });
 });
 
@@ -131,9 +133,11 @@ Route::middleware(['middleware' => 'admin'])->group(function () {
  */
 Route::middleware(['middleware' => 'admin'])->group(function () {
     Route::namespace(RouteServiceProvider::NAMESPACE . 'Admin\Tag')->group(function() {
-        Route::get('/tag','IndexController')->name('admin.tag.index');
-        Route::post('/tag/store','StoreController')->name('admin.tag.store');
-        Route::delete('/tag/delete','DestroyController')->name('admin.tag.delete');
+        Route::prefix('admin')->group(function (){
+            Route::get('/tag','IndexController')->name('admin.tag.index');
+            Route::post('/tag/store','StoreController')->name('admin.tag.store');
+            Route::delete('/tag/delete','DestroyController')->name('admin.tag.delete');
+        });
     });
 });
 
@@ -142,9 +146,11 @@ Route::middleware(['middleware' => 'admin'])->group(function () {
  */
 Route::middleware(['middleware' => 'admin'])->group(function () {
     Route::namespace(RouteServiceProvider::NAMESPACE . 'Admin\CommentList')->group(function() {
-        Route::get('/comment-list','IndexController')->name('admin.comment-list.index');
-        Route::get('/comment-list/show','ShowController')->name('admin.comment-list.show');
-        Route::delete('/comment-list/delete','DestroyController')->name('admin.comment-list.delete');
+        Route::prefix('admin')->group(function (){
+            Route::get('/comment-list','IndexController')->name('admin.comment-list.index');
+            Route::get('/comment-list/show','ShowController')->name('admin.comment-list.show');
+            Route::delete('/comment-list/delete','DestroyController')->name('admin.comment-list.delete');
+        });
     });
 });
 
@@ -153,9 +159,11 @@ Route::middleware(['middleware' => 'admin'])->group(function () {
  */
 Route::middleware(['middleware' => 'admin'])->group(function () {
     Route::namespace(RouteServiceProvider::NAMESPACE . 'Admin\WordCheck')->group(function() {
-        Route::get('/word-check','IndexController')->name('admin.word-check.index');
-        Route::post('/word-check/store','StoreController')->name('admin.word-check.store');
-        Route::delete('/word-check/delete','DestroyController')->name('admin.word-check.delete');
+        Route::prefix('admin')->group(function (){
+            Route::get('/word-check','IndexController')->name('admin.word-check.index');
+            Route::post('/word-check/store','StoreController')->name('admin.word-check.store');
+            Route::delete('/word-check/delete','DestroyController')->name('admin.word-check.delete');
+        });
     });
 });
 

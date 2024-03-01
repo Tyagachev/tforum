@@ -14,23 +14,25 @@
                 <div class="topic_card p-2">
                         <div class="d-flex">
                             <a style="text-decoration: none" href="{{ route('profile.index', $topicObject->user_id) }}">
-                                <div style="border: 1px solid gold; width: 100px; height: 100px; float:right; margin: 0 10px 0 10px">
-                                @if($topicObject->user->avatar->image)
-                                    <img style="width: 100px; height: 100px;" src="{{ url(('storage/' . $topicObject->user->avatar->image)) }}" alt="">
-                                @else
-                                    <img style="width: 100px; height: 100px;" src="{{ asset('img/person.svg') }}" alt="">
-                                @endif
+                                <div class="avatar_border">
+                                    @if($topicObject->user->avatar->image)
+                                        <img style="width: 100px; height: 100px;" src="{{ url(('storage/' . $topicObject->user->avatar->image)) }}" alt="">
+                                    @else
+                                        <img style="width: 100px; height: 100px;" src="{{ asset('img/person.svg') }}" alt="">
+                                    @endif
                                 </div>
                             </a>
                             <div class="w-100">
                                 <div style="word-break: break-all">
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                            <p class="text">{{ $topicObject->user->name }}</p>
+                                            <div class="d-flex justify-content-between pb-3">
+                                                <p class="text">{{ $topicObject->user->name }}</p>
+                                                <p class="text">{{ $topicObject->dateAsCarbon->diffForHumans() }}</p>
+                                            </div>
                                             <p class="text">{!! $topicObject->text !!}</p>
                                         </div>
                                         <div class="ps-2">
-                                            <p class="text">{{ $topicObject->dateAsCarbon->diffForHumans() }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -49,7 +51,8 @@
                                 </div>
                                 <div class="d-flex">
                                     @csrf
-                                    <textarea  name="text" class="textarea_style" id="" cols="30" rows="2" placeholder="Комментарий" required>{{ old('text') }}</textarea>
+                                    <textarea id="textarea_style" name="text" class="textarea_style" id="" cols="30" rows="2" placeholder="Комментарий" required>{{ old('text') }}</textarea>
+                                    <div id="text_area_div"></div>
                                     <input style="display: none" name="topic_id" type="hidden" value="{{ $topicObject->id }}">
                                     <input style="display: none" name="reply_user_id" type="hidden" value="{{ $topicObject->user_id }}">
                                     <input type="hidden" name="parent_id" value="{{ null }}">
