@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('word_checks', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->string('word')->unique();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('likeable_id');
+            $table->string('likeable_type');
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('word_checks');
+        Schema::dropIfExists('likes');
     }
 };

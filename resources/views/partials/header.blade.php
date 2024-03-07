@@ -1,10 +1,15 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
-                <a class="navbar-brand text-white text-uppercase" href="{{ url('/') }}">
-                    Tarisland-forum
-                </a>
+                <div class="d-flex align-items-center">
+                    <div class="header_logo-wrp">
+                        <img class="header_logo" src="{{ asset('img/tlogo.png') }}">
+                    </div>
+                    <div>
+                        <a class="navbar-brand text-white text-uppercase" href="{{ url('/') }}">Tarisland-forum</a>
+                    </div>
+                </div>
                 <div>
-                    <a href="{{ route('index.news') }}"><button class="btn btn-info text-white">Новости</button></a>
+                    <a href="{{ route('index.news') }}"><button class="btn btn-outline-info">Новости</button></a>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

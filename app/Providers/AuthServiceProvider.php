@@ -11,7 +11,6 @@ use App\Models\User;
 use App\Policies\UserPolicy;
 use App\Policies\AvatarPolicy;
 use App\Policies\CommentPolicy;
-use App\Policies\ProfilePolicy;
 use App\Policies\TopicPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 

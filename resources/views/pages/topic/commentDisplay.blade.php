@@ -6,11 +6,11 @@
                     @if($comment->parent_id == null)
                         <div class="profile d-flex justify-content-between">
                             <a style="text-decoration: none" href="{{ route('profile.index', $comment->user_id) }}">
-                                <div class="d-flex">
+                                <div class="avatar_border_reply">
                                 @if($comment->user->avatar->image)
-                                        <img style="width: 100px; height: 100px; margin-right: 10px; border: gold 1px solid;" src="{{ url(('storage/' . $comment->user->avatar->image)) }}" alt="">
+                                        <img style="width: 100px; height: 100px; margin-right: 10px;" src="{{ url(('storage/' . $comment->user->avatar->image)) }}" alt="">
                                 @else
-                                        <img style="width: 60px; margin-right: 10px; border: gold 1px solid;" src="{{ asset('img/person.svg') }}" alt="">
+                                        <img style="width: 60px; margin-right: 10px;" src="{{ asset('img/person.svg') }}" alt="">
                                 @endif
                                 <p class="text">{{ $comment->user->name }}</p>
                                 </div>
@@ -27,7 +27,19 @@
                                 @endcan
                             </div>
                         </div>
-                        <p class="tab_text-gold">Комментарий к посту:</p>
+                    <div class="d-flex">
+                        <div>
+                            <p class="tab_text-gold">Комментарий к посту</p>
+                        </div>
+                        <div class="comment_arrow">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="gold" class="bi bi-arrow-90deg-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M14.854 4.854a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 4H3.5A2.5 2.5 0 0 0 1 6.5v8a.5.5 0 0 0 1 0v-8A1.5 1.5 0 0 1 3.5 5h9.793l-3.147 3.146a.5.5 0 0 0 .708.708z"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+
                         <div style="background-color: #555d70; padding: 10px; border: 1px solid white">
                             {!! $comment->topic->text !!}
                         </div>
@@ -39,12 +51,14 @@
                             <div class="d-flex justify-content-between">
                                 <a style="text-decoration: none" href="{{ route('profile.index', $comment->user_id) }}">
                                     <div class="profile d-flex">
+                                        <div class="avatar_border_reply">
                                             @if($comment->user->avatar->image)
-                                                <img style="width: 100px; height: 100px; margin-right: 10px; border: gold 1px solid;" src="{{ url('storage/' . $comment->user->avatar->image) }}" alt="">
+                                                <img style="width: 100px; height: 100px; margin-right: 10px;" src="{{ url('storage/' . $comment->user->avatar->image) }}" alt="">
                                             @else
-                                                <img style="width: 60px; margin-right: 10px; border: gold 1px solid;" src="{{ asset('img/person.svg') }}" alt="">
+                                                <img style="width: 60px; margin-right: 10px;" src="{{ asset('img/person.svg') }}" alt="">
                                             @endif
                                             <p class="text">{{ $comment->user->name }}</p>
+                                        </div>
                                     </div>
                                 </a>
                                 <div class="d-flex flex-column align-items-center mb-1">
@@ -59,7 +73,18 @@
                                     @endcan
                                 </div>
                             </div>
-                        <p class="tab_text-gold">Ответ на комментарий:</p>
+                            <div class="d-flex">
+                                <div>
+                                    <p class="tab_text-gold">Ответ на комментарий</p>
+                                </div>
+                                <div class="comment_arrow">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="gold" class="bi bi-arrow-90deg-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M14.854 4.854a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 4H3.5A2.5 2.5 0 0 0 1 6.5v8a.5.5 0 0 0 1 0v-8A1.5 1.5 0 0 1 3.5 5h9.793l-3.147 3.146a.5.5 0 0 0 .708.708z"/>
+                                </svg>
+                            </span>
+                                </div>
+                            </div>
                         <div style="background-color: #555d70;padding: 10px; border: 1px solid white">
                         <div class="d-flex">
                             <div style="margin-right: 10px">
@@ -78,24 +103,61 @@
                         <div class="comment_text">
                             <p class ="text">{!! $comment->text !!}</p>
                         </div>
-                        </div>
                     @endif
+                            <div>
+                                <form class="likeForm">
+                                    @if(auth()->user())
+                                    @csrf
+                                    <input type="hidden" name="user_id" value="{{ \Illuminate\Support\Facades\Auth::id() }}">
+                                    <input type="hidden" name="likeable_id" value="{{ $comment->id }}">
+                                    @endif
+                                    <div class="d-flex justify-content-end align-items-center">
+                                            <button  class="btn p-1">
+                                                <svg id="{{ $comment->id }}" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                     fill="
+                                                     {{ ($comment->isLikeExistComment($comment->id)) ? 'red' : 'white' }}"
+                                                     class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+                                                </svg>
+                                            </button>
+                                        @php
+                                            $i = 0;
+                                        @endphp
+
+                                        @foreach($comment->likes as $likes)
+                                            @php
+                                                if ($likes->likeable_id == $comment->id) {
+                                                    $i++;
+                                                }
+                                            @endphp
+                                        @endforeach
+                                        <div>
+                                            <span id="{{ $comment->id }}" style="color: white">{{ $i }}</span>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
                     <div>
                         @if(auth()->user())
-                            @if($comment->user_id != auth()->user()->id)<p class="accordion">Ответить</p>@endif
+                            @if($comment->user_id != auth()->user()->id)<p class="accordion">Добавить комментарий</p>@endif
                             <div class="panel">
                                 <form action="{{ route('comment.store') }}" method="POST">
                                     @csrf
-                                    <div style="display: flex; margin-bottom: 10px">
                                         <textarea class="textarea_style" name="text" id="" cols="30" rows="2" placeholder="Комментарий" required>{{ old('text') }}</textarea>
                                         <input type="hidden" name="topic_id" value="{{ $topic_id }}">
                                         <input type="hidden" name="reply_user_id" value="{{ $comment->user_id }}">
                                         <input type="hidden" name="parent_id" value="{{ $comment->id }}">
-                                        <button class="textarea_btn" type="submit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-send" viewBox="0 0 20 20">
-                                                <path class="fil0" d="M19.62 9.24c0.07,-0.03 0.14,-0.07 0.2,-0.13 0.24,-0.25 0.24,-0.65 0,-0.89 -0.06,-0.06 -0.13,-0.11 -0.2,-0.14l-18.17 -7.79 -0.01 0 -0.56 -0.24c-0.24,-0.1 -0.51,-0.05 -0.69,0.14 -0.16,0.15 -0.22,0.37 -0.17,0.58l0.13 0.6 0 0 1.62 7.29 -1.62 7.3 0 0 -0.13 0.6c-0.05,0.21 0.01,0.43 0.17,0.58 0.18,0.18 0.45,0.23 0.69,0.13l18.74 -8.03 0 0zm-16.7 0.05l0.11 -0.49c0.02,-0.09 0.02,-0.18 0,-0.27l-0.11 -0.5 13.38 0 1.47 0.63 -1.47 0.63 -13.38 0z"/>
-                                            </svg>
-                                        </button>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <span class="count_symbol-text">Кол-во символов: </span>
+                                            <span class="count_letter-text">1000</span><span style="color: white">/1000</span>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-info btn-send rounded-pill" type="submit">
+                                                Ответить
+                                            </button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>

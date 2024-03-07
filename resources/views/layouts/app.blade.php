@@ -6,23 +6,31 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>Tarisland-forum</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
-
-    <!--Boot-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="manifest" href="{{asset('img/favicons/site.webmanifest')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('img/favicons/favicon-16x16.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('img/favicons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{asset('img/favicons/android-chrome-192x192.png')}}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{{asset('img/favicons/android-chrome-512x512.png')}}">
+    <link rel="apple-touch-icon" type="image/png" href="{{asset('img/favicons/apple-touch-icon.png')}}">
+    <link rel="apple-touch-icon" type="image/png" href="{{asset('img/favicons/favicon-32x32.png')}}">
+
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script defer src="{{ asset('js/bootstrap.bundle.js') }}"></script>
     <script defer src="{{ asset('js/toggle.js') }}"></script>
-    <script defer src="{{ asset('js/uploadCheck.js') }}"></script>
-    <script defer src="{{ asset('js/countLetters.js') }}"></script>
-
+    <script defer src="{{ asset('js/like.js') }}"></script>
+    <script defer src="{{ asset('js/upload_check.js') }}"></script>
+    <script defer src="{{ asset('js/count_letters.js') }}"></script>
+    <script defer src="{{ asset('js/textarea_resize.js') }}"></script>
+    <script defer src="{{ asset('js/textarea_count_letters.js') }}"></script>
+@vite(['resources/js/app.js'])
 <body>
     <div id="app">
             @include('partials.header')
@@ -32,16 +40,4 @@
             @include('partials.footer')
     </div>
 </body>
-<script>
-    var textarea = document.querySelectorAll('.textarea_style');
-    console.log(textarea)
-    textarea.forEach(function(ww) {
-        ww.addEventListener('keydown', function(a){
-            console.log('www')
-            if(this.scrollTop > 0){
-                this.style.height = this.scrollHeight + "px";
-            }
-        })
-    });
-</script>
 </html>

@@ -3,15 +3,18 @@
 namespace App\Models;
 
 use App\Models\Traits\GetDate;
+use App\Models\Traits\LikeTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 
 class Comment extends Model
 {
     use HasFactory;
     use GetDate;
+    use LikeTrait;
 
     /**
      * Таблица comments
@@ -90,4 +93,12 @@ class Comment extends Model
         return $this->findOrFail($id);
     }
 
+    public function isLikeExistComment($commentId)
+    {
+        return Like::query()
+            ->where('user_id', '=', Auth::id())
+            ->where('likeable_id', '=', $commentId)
+            ->where('likeable_type', '=', 'App\Models\Comment')
+            ->first();
+    }
 }

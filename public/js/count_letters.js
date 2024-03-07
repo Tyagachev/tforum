@@ -5,6 +5,7 @@ const countTextarea = document.querySelector(".count_letter-text");
 
 /**
  * Подсчет символов в инпуте
+ * создания поста
  */
 input.oninput = function()
 {
@@ -20,6 +21,7 @@ input.oninput = function()
 
 /**
  * Подсчет символов в текстовом поле
+ * создания поста
  */
 textarea.oninput = function()
 {

@@ -24,8 +24,8 @@ class CommentStoreRequest extends FormRequest
         return [
             'reply_user_id' => ['nullable', 'int'],
             'topic_id' => ['int'],
-            'text' => ['string', 'required'],
-            'parent_id' =>['nullable', 'int']
+            'text' => ['string', 'required', 'min:1','max:1000'],
+            'parent_id' => ['nullable', 'int']
         ];
     }
 }

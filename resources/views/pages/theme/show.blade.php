@@ -33,7 +33,7 @@
                 @endif
             <hr style="color: #fff">
                 <div class="input-group w-75 mb-2">
-                    <form class="d-flex w-75" action="{{ route('topic.search.input') }}" method="GET">
+                    <form class="search_form" action="{{ route('topic.search.input') }}" method="GET">
                         <input type="hidden" name="theme_id" value="{{ $theme->id }}">
                         <input type="text" name="theme_name" class="form-control form-control-lg rounded-0" placeholder="Название темы">
                         <div class="input-group-append" style="background-color: #ffca2c">
@@ -60,7 +60,7 @@
                                 <form action="{{ route('topic.tag.search') }}" method="GET">
                                     <input type="hidden" name="theme_id" value="{{ $theme->id }}">
                                     <input type="hidden" name="tag_name" value="{{ $tag->name }}">
-                                    <button class="btn btn-light" type="submit">{{ $tag->name }}</button>
+                                    <button class="btn btn-outline-info" type="submit">{{ $tag->name }}</button>
                                 </form>
                             </div>
                         @endforeach
