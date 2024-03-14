@@ -19,7 +19,7 @@ class CommentService
         $comment = new Comment([
             'user_id' => auth()->user()->id,
             'reply_user_id' => $data['reply_user_id'],
-            'text' => str_replace("\r\n",'<br><br>',$data['text']),
+            'text' => ("\r\n") ? str_replace("\r\n",'<br>', $data['text']) : str_replace("\r\n",'<br><br>', $data['text']),
             'topic_id' => $data['topic_id'],
             'parent_id' => $data['parent_id']
         ]);

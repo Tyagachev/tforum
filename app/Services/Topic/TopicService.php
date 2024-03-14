@@ -18,7 +18,7 @@ class TopicService
         $saveData = [
             'user_id' => auth()->user()->id,
             'title' => $topicData['title'],
-            'text' => str_replace("\r\n",'<br><br>', $topicData['text']),
+            'text' => ("\r\n") ? str_replace("\r\n",'<br>', $topicData['text']) : str_replace("\r\n",'<br><br>', $topicData['text']),
             'tag_topic' => $topicData['tag_topic'],
             'theme_id' => $topicData['theme_id']
         ];
@@ -74,6 +74,8 @@ class TopicService
     public function querySearchTopicPagination($theme, $input): LengthAwarePaginator
     {
         return Topic::query()->where( 'title','like', '%' . $input['theme_name'] . '%')
+            ->join('users', 'users.id', '=', 'topics.user_id')
+            ->select('topics.*','users.name as user_name')
             ->where('theme_id','=', $theme->id)
             ->orderBy('created_at', 'DESC')
             ->paginate(30)->withQueryString();

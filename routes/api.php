@@ -20,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::namespace(\App\Providers\RouteServiceProvider::NAMESPACE . 'API\Liked')->group(function () {
     Route::post('/like/create', 'LikedController');
 });
+
+

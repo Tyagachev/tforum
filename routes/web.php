@@ -175,4 +175,3 @@ Route::get('/foo', function () {
     return redirect()->back();
 });
 
-

@@ -30,6 +30,8 @@
     <script defer src="{{ asset('js/count_letters.js') }}"></script>
     <script defer src="{{ asset('js/textarea_resize.js') }}"></script>
     <script defer src="{{ asset('js/textarea_count_letters.js') }}"></script>
+
+
 @vite(['resources/js/app.js'])
 <body>
     <div id="app">
@@ -40,4 +42,5 @@
             @include('partials.footer')
     </div>
 </body>
+
 </html>

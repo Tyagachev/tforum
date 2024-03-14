@@ -1,7 +1,6 @@
 const url = 'http://127.0.0.1:8000/api/like/create';
 const token = document.querySelector("input[name='_token']").value;
 const myForm = document.querySelectorAll('.likeForm');
-
 myForm.forEach((element) => {
     element.addEventListener('click', (event) => {
         event.preventDefault();
