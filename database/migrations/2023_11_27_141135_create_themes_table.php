@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('subtitle');
             $table->text('image')->default(null);
+            $table->integer('is_published')->default(1);
             $table->timestamps();
         });
     }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->longText('text');
             $table->bigInteger('view_count')->default(0);
             $table->string('image');
+            $table->integer('is_published')->default(1);
             $table->timestamps();
         });
     }

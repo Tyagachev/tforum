@@ -18,6 +18,10 @@ Auth::routes();
 Route::namespace(RouteServiceProvider::NAMESPACE . 'Welcome')->group(function() {
     Route::get('/','IndexController')->name('welcome');
 });
+Route::get('/f', function () {
+    $comment = \App\Models\User::query()->where();
+    dd($comment->likes->count());
+});
 
 /**
  * Home
