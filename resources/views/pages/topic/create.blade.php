@@ -13,19 +13,19 @@
                             <span class="count_letter-title">40</span>
                         </div>
                     </div>
-                    <input name="title" type="text" class="form_topic-title" id="exampleFormControlInput1" required  placeholder="Название темы" value="{{ old('title') }}">
+                    <input name="title" type="text" class="form_topic-title" id="exampleFormControlInput" required  placeholder="Название темы" value="{{ old('title') }}">
                 </div>
                 <div class="form-group mt-2">
                     <div class="form-group pt-2">
                         <div class="count_flex">
-                            <label for="exampleFormControlInput1"><span class="tab_text-gold">Текст:</span><span class="text-danger">*</span></label>
+                            <label for="exampleFormControlInput"><span class="tab_text-gold">Текст:</span><span class="text-danger">*</span></label>
                             <div>
                                 <span class="count_symbol-text">Кол-во символов: </span>
                                 <span class="count_letter-text">2000</span>
                             </div>
                         </div>
                     </div>
-                    <textarea name="text" class="form_topic-textarea" id="" rows="10" cols="45" required  placeholder="Введите текст"></textarea>
+                    <textarea name="text" class="form_topic-textarea" id="exampleFormControlTextarea" rows="10" cols="45" required  placeholder="Введите текст"></textarea>
                     <label for=""><span class="tab_text-gold">Добавьте тег:</span><span class="text-danger">*</span></label>
                     <div class="form-group pt-2">
                     <select class="form-select w-50" id="teg-select" name="tag_topic" required>

@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tag_theme', function (Blueprint $table) {
+        Schema::create('site_rules', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('theme_id');
-            $table->unsignedBigInteger('tag_id');
-            $table->foreign('theme_id')->references('id')->on('themes');
-            $table->foreign('tag_id')->references('id')->on('tags');
+            $table->integer('paragraph');
+            $table->text('rule');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('topics_tags');
+        Schema::dropIfExists('site_rules');
     }
 };

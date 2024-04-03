@@ -66,7 +66,7 @@
                         @endforeach
                     @endif
                 </div>
-            @if(empty($themeTopics))
+            @if(count($themeTopics) == 0)
                 <h1 class="text">Записей пока нет :)</h1>
             @else
                 <table class="table_wrp">

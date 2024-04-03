@@ -86,8 +86,7 @@
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="gold"
                                              class="bi bi-arrow-90deg-right" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                              d="M14.854 4.854a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 4H3.5A2.5 2.5 0 0 0 1 6.5v8a.5.5 0 0 0 1 0v-8A1.5 1.5 0 0 1 3.5 5h9.793l-3.147 3.146a.5.5 0 0 0 .708.708z"/>
+                                                <path fill-rule="evenodd" d="M14.854 4.854a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 4H3.5A2.5 2.5 0 0 0 1 6.5v8a.5.5 0 0 0 1 0v-8A1.5 1.5 0 0 1 3.5 5h9.793l-3.147 3.146a.5.5 0 0 0 .708.708z"/>
                                         </svg>
                                     </span>
                                 </div>
@@ -143,7 +142,7 @@
                                             @endphp
                                         @endforeach
                                         <div>
-                                            <span class="like_count" id="{{ $comment->id }}"
+                                            <span class="like_count" id="count_comment_{{ $comment->id }}"
                                                   style="color: white">{{ $i }}</span>
                                         </div>
                                     </div>
@@ -158,8 +157,7 @@
                                     <div class="panel">
                                         <form action="{{ route('comment.store') }}" method="POST">
                                             @csrf
-                                            <textarea class="textarea_style" name="text" id="" cols="30" rows="2"
-                                                      placeholder="Комментарий" required>{{ old('text') }}</textarea>
+                                            <textarea class="textarea_style" name="text" id="" cols="30" rows="2" placeholder="Комментарий" required>{{ old('text') }}</textarea>
                                             <input type="hidden" name="topic_id" value="{{ $topic_id }}">
                                             <input type="hidden" name="reply_user_id" value="{{ $comment->user_id }}">
                                             <input type="hidden" name="parent_id" value="{{ $comment->id }}">
@@ -182,7 +180,7 @@
                         </div>
                 </div>
             </div>
+
             @include('pages.topic.comment_display', ['comments' => $comment->replies])
         </div>
 @endforeach
-

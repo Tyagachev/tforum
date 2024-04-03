@@ -16,6 +16,8 @@ class News extends Model
      */
     protected $table = 'news';
 
+    protected $guarded = false;
+
     /**
      * Атрибуты, которые можно массово присваивать.
      *

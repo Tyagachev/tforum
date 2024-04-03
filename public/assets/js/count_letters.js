@@ -7,7 +7,8 @@ const countTextarea = document.querySelector(".count_letter-text");
  * Подсчет символов в инпуте
  * создания поста
  */
-input.oninput = function()
+input.addEventListener('input', title);
+function title()
 {
     input.value = input.value.slice(0, 40);
     const textlength = 40 - input.value.length;
@@ -23,7 +24,8 @@ input.oninput = function()
  * Подсчет символов в текстовом поле
  * создания поста
  */
-textarea.oninput = function()
+textarea.addEventListener('input', topicTextarea);
+function topicTextarea()
 {
     textarea.value = textarea.value.slice(0, 2000);
     const textlength = 2000 - textarea.value.length;

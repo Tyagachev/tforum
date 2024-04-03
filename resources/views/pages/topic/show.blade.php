@@ -9,7 +9,7 @@
                 <h1><span class="text_color">{{ $topicObject->title }}</span></h1>
                 <!--Это-->
                 @can('editTopic', $topicObject)
-                    <a href="{{ route('edit.topic', $topicObject->user_id)}}">Редактировать</a>
+                    <a href="{{ route('edit.topic', $topicObject)}}">Редактировать</a>
                 @endcan
                 <hr style="color:#ffff">
                 <div class="topic_card p-2">

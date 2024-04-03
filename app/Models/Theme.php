@@ -16,6 +16,8 @@ class Theme extends Model
      */
     protected $table = 'themes';
 
+    protected $guarded = false;
+
     /**
      * Атрибуты, которые можно массово присваивать.
      *

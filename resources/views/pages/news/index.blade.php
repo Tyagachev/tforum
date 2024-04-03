@@ -3,7 +3,9 @@
 <div class="page">
     <div>
         <div class="container">
-            <img class="w-100" src="{{ asset('img/logo2.jpg') }}" alt="">
+            <div class="pt-2">
+                <img class="w-100" src="{{ asset('img/logo2.jpg') }}" alt="">
+            </div>
             <div class="pt-1">
                 @can('view', Auth::user())
                 <a href="{{ route('create.news') }}">

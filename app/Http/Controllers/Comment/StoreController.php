@@ -21,6 +21,6 @@ class StoreController extends BaseController
         if ($storeComment) {
             return redirect()->back()->with('success', 'Комментарий добавлен');
         }
-        return redirect()->back()->with('error', 'Не удалось добавить комментарий');;
+        return redirect()->back()->with('error', 'Не удалось добавить комментарий');
     }
 }

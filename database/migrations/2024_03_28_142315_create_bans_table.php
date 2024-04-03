@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tag_theme', function (Blueprint $table) {
+        Schema::create('bans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('theme_id');
-            $table->unsignedBigInteger('tag_id');
-            $table->foreign('theme_id')->references('id')->on('themes');
-            $table->foreign('tag_id')->references('id')->on('tags');
             $table->timestamps();
         });
     }
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('topics_tags');
+        Schema::dropIfExists('bans');
     }
 };

@@ -172,6 +172,23 @@ Route::middleware(['middleware' => 'admin'])->group(function () {
 });
 
 /**
+ * Admin\SiteRule
+ */
+Route::middleware(['middleware' => 'admin'])->group(function () {
+    Route::namespace(RouteServiceProvider::NAMESPACE . 'Admin\SiteRule')->group(function() {
+        Route::prefix('admin')->group(function (){
+            Route::get('/rule','IndexController')->name('admin.rule.index');
+            Route::post('/rule/store','CreateController')->name('admin.rule.store');
+            Route::delete('/rule/delete','DestroyController')->name('admin.rule.delete');
+        });
+    });
+});
+
+Route::namespace(RouteServiceProvider::NAMESPACE . 'Admin\SiteRule')->group(function() {
+        Route::get('/rule/show','ShowController')->name('admin.rule.show');
+});
+
+/**
  * Создание storage:link
  */
 Route::get('/foo', function () {

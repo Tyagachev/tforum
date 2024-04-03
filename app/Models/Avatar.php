@@ -17,6 +17,8 @@ class Avatar extends Model
      */
     protected $table = 'avatars';
 
+    protected $guarded = false;
+
     /**
      * Атрибуты, которые можно массово присваивать.
      *

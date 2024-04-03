@@ -11,9 +11,9 @@ class CommentService
      * Создание комментария
      *
      * @param array $data
-     * @return bool
+     *
      */
-    public function save(array $data): bool
+    public function save(array $data)
     {
         $topic = Topic::query()->findOrFail($data['topic_id']);
         $comment = new Comment([

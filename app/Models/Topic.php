@@ -21,6 +21,8 @@ class Topic extends Model
      */
     protected $table = 'topics';
 
+    protected $guarded = false;
+
     /**
      * Атрибуты, которые можно массово присваивать.
      *

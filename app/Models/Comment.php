@@ -23,6 +23,8 @@ class Comment extends Model
      */
     protected $table = 'comments';
 
+    protected $guarded = false;
+
     /**
      * Атрибуты, которые можно массово присваивать.
      *

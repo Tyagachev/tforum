@@ -5,6 +5,7 @@ namespace App\Services\Theme;
 use App\Models\Theme;
 use App\Models\Topic;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 
 class ThemeService
 {
@@ -60,6 +61,8 @@ class ThemeService
      */
     public function searchTheme($id): object|null
     {
+        DB::table('tag_theme')->where('theme_id', '=', $id)->delete();
+
         $searchTheme = Theme::query()->findOrFail($id);
         return $searchTheme;
     }
